@@ -60,11 +60,11 @@
             </div>
             <br>
 
-            <form class='col-12 login' action="/index"  method="GET">
+            <form class='col-12 login' action="/login/check"  method="GET">
 
               <div class="form-group">
                 <input id="uid" name="uid" class='form-control' type="email" placeholder="Enter Username(email id)" id="mail" required>
-                <label for="email" id="feedback" style="color:red; visibility:hidden">Enter valid e-mail id</label>
+                
 
               </div>
 
@@ -72,7 +72,7 @@
 
               <div class="form-group">
                   <input id="pwd" name="pwd" class='form-control' type="password" placeholder="Enter Password" id="pwd" required>
-                  <label for="pwd" id="feedback2" style="color:red; visibility:hidden">Password should be minimum 8 characters</label>
+                 
               </div>
 
               <button id="login" name="login" type="submit" class="btn btn-success text-center"><i class="fas fa-sign-in-alt"></i>Log in</button>

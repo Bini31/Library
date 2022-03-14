@@ -1,5 +1,6 @@
 const express=require('express');
 const signupRouter=express.Router();
+const Usersdata=require('../model/Usersdata')
 
     signupRouter.get('/',function(req,res){
        
@@ -10,5 +11,18 @@ const signupRouter=express.Router();
         })
        
        })
+       signupRouter.post('/adduser',function(req,res){
+        var item={
+   
+            uid:req.body.uid,
+            pwd:req.body.pwd
+           }
+           var user=Usersdata(item);
+           user.save();//saving to database
+           res.redirect('/login');
+           
+        })
        
-module.exports=signupRouter;
+      
+    
+    module.exports= signupRouter;
