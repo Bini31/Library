@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pustakam</title>
+    
+    <script src="https://kit.fontawesome.com/859e7ab76e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ 
+    <link rel='stylesheet' href='css/home.css'>
+    
+</head>
+<body>
+  
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark primary-color fixed-top">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">Pustakam.Com</a>
+      
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+      
+          <!-- Links -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/login">Log In
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/signup">Sign Up</a>
+            </li>
+
+      
+          </ul>
+          <!-- Links end-->
+      
+
+
+        </div>
+        <!-- Collapsible content end -->
+      
+    </nav>
+  <!-- Material form register -->
+  <div class="card mx-auto container">
+
+
+        
+    <h3 class="card-header info-color white-text text-center py-4">
+        <strong>Sign Up</strong>
+    </h3><br>
+
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+
+        <!-- Form -->
+        <form class="text-center" action="/login" style="color: #757575;" >
+
+            <div class="form-row">
+                <div class="col">
+                    <!-- First name -->
+                    <div class="md-form">
+                        <label for="fname">First name</label>
+                        <input type="text" id="fname" class="form-control" required>
+                        <label for="fname" id="fnamefeedback" style="color:red; visibility:hidden">Should contain only alphabets.</label>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <!-- Last name -->
+                    <div class="md-form">
+                        <label for="lname">Last name</label>   
+                        <input type="text" id="lname" class="form-control" required>
+                        <label for="lname" id="lnamefeedback" style="color:red; visibility:hidden">Should contain only alphabets.</label>
+                 </div>
+                </div>
+            </div>
+
+            <!-- E-mail -->
+            <div class="md-form mt-0">
+                <label for="email">E-mail</label>
+                <input id="uid" name="uid" type="email" onkeyup="validate()" class="form-control" required>
+              
+
+            </div>
+
+            <span class="badge" id="error"></span>
+
+
+
+            <!-- Password -->
+            <div class="md-form mt-0">
+                <label for="pwd">Password</label>
+                <input id="pwd" name="pwd" type="password" id="pwd" onkeyup="validatePassword(this.value)" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" required>
+              
+
+            </div>
+            <span class="badge" id="msg"></span>
+            <div id="message" hidden="true">
+                <h3>Password must contain the following:</h3>
+                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                <p id="number" class="invalid">A <b>number</b></p>
+                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+              </div>
+      
+            <!-- Sign up button -->
+            <!-- <button class="btn btn-outline-info btn-rounded  my-4 waves-effect z-depth-0" type="submit">Sign Up</button> -->
+            <button id="signup" name="signup" type="submit"  class="btn btn-success text-center">Sign Up</button>
+            <br>
+
+            
+            <!-- Terms of service -->
+           
+
+        </form>
+        <!-- End of Form -->
+
+    </div>
+
+
+</div>
+<!-- End of Material form register -->
+
+      
+    <footer class="page-footer font-small unique-color-dark pt-2 fixed-bottom">
+
+
+      
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+          <a href="/"> Pustakam.com</a>
+        </div>
+        <!-- Copyright -->
+  
+    </footer>
+      <script src="js/bootstrap.min.js"></script>
+      
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ 
+    <script>
+        var myInput = document.getElementById("pwd");
+        var msgpass = document.getElementById("message");
+        myInput.onfocus = function () {
+    msgpass.removeAttribute("hidden", "true")
+    document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function () {
+    document.getElementById("message").style.display = "none";
+}
+
+function validatePassword(password) {
+
+    if (password.length === 0) {
+        document.getElementById("msg").innerHTML = "";
+        return;
+    }
+
+
+
+    // Create an array and push all possible values that you want in password
+    var matchedCase = new Array();
+    matchedCase.push("[$@$!%*#?&]"); // Special Charector
+    matchedCase.push("[A-Z]");      // Uppercase Alpabates
+    matchedCase.push("[0-9]");      // Numbers
+    matchedCase.push("[a-z]");     // Lowercase Alphabates
+
+    // Check the conditions
+    var ctr = 0;
+    for (var i = 0; i < matchedCase.length; i++) {
+        if (new RegExp(matchedCase[i]).test(password)) {
+            ctr++;
+        }
+    }
+    // Display it
+    var color = "";
+    var strength = "";
+    switch (ctr) {
+        case 0:
+        case 1:
+        case 2:
+            strength = "Very Weak Password";
+            color = "red";
+            break;
+        case 3:
+            strength = "Medium Password";
+            color = "orange";
+            break;
+        case 4:
+            strength = "Strong Password";
+            color = "green";
+            break;
+    }
+    document.getElementById("msg").innerHTML = strength;
+    document.getElementById("msg").style.color = color;
+   
+
+
+}
+let myemail=document.getElementById("uid");
+let error=document.getElementById("error");
+function validate()
+{ let regexp=/^([A-Za-z0-9\.-]+)@([A-Za-z0-9\-]+).([a-z]{2,3})?$/
+  if(regexp.test(myemail.value)){
+      error.innerHTML="valid";
+      error.style.color="green";
+      return true;
+  }
+  else{
+      
+      error.innerHTML="invalid";
+      error.style.color="red";
+      return false;
+  }
+  myemail.onchange = function () {
+    document.getElementById("error").style.display = "none";
+}
+  
+}
+    </script>
+</body>
+</html>
