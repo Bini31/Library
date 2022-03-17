@@ -3,26 +3,7 @@ const booksRouter=express.Router();
 const Bookdata=require('../model/Bookdata');
 function router(nav)
 {
-    /*var books = [
-        {
-            title:"Tom and Jerry",
-            author:"Joseph Barbera",
-            genre:"Cartoon",
-            img:"tom.jpg"
-        },
-        {
-           title:"Harry Potter",
-           author:"J.K.Rowling",
-           genre:"Fantacy",
-           img:"harry.jpg"
-       },
-       {
-           title:"My Life In Full",
-           author:"Indira Luyi",
-           genre:"Autobiography",
-           img:"Indira.jpg"
-       }
-    ]*/
+   
     booksRouter.get('/',function(req,res){
         Bookdata.find().then(function(books){
             res.render("books",{
@@ -46,6 +27,56 @@ function router(nav)
        
         
     })
+    booksRouter.post('/delete', function (req, res) {
+
+        const id = req.body.id;  
+    
+        Bookdata.findOneAndDelete({ _id: id })
+            .then(function () {
+    
+                res.redirect('/books'),
+                nav
+               
+    
+            })  
+    })
+    
+    
+    
+    //router to edit book
+    booksRouter.post('/edit', function (req, res) {
+    
+        Bookdata.findById(req.body.id, function(err, data){
+            if (err) {
+                throw err;
+            }
+            else {
+                res.render('editbook', {nav,
+                    title:"Library",
+                    data})
+            }
+        })
+    })
+    
+    
+    
+    //router to update book
+    booksRouter.post('/update', function (req, res) {
+    
+        Bookdata.findByIdAndUpdate(req.body.id, { $set: req.body }, function (err, data) {
+            if (err) {
+                res.json({ status: "Failed" });
+            }
+            else if (data.n == 0) {
+                res.json({ status: "No match Found" });
+            }
+            else {
+                res.redirect("/books");
+            }
+    
+        }) 
+    })
+    
     return booksRouter;
 };
 

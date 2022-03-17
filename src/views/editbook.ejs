@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title></title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+</head>
+<header class="navbar navbar-bright navbar-fixed-top" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+       
+      </div>
+      <nav class="collapse navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+            <%for(i=0;i<nav.length;i++){%>
+          <li>
+            <a href="<%=nav[i].link%>"><%=nav[i].name%></a>
+          </li>
+          <%}%>
+        </ul>
+        
+      </nav>
+    </div>
+  </header>
+<body>
+    <div id="masthead">  
+        <div class="container">
+          <div class="row">
+            <div class="col-md-7">
+              <h1>Edit Book
+                <p class="lead"></p>
+              </h1>
+            </div>
+         
+          </div> 
+        </div><!-- /cont -->
+      
+      </div>
+      
+      
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-md-12"> 
+            
+            <div class="panel">
+              <div class="panel-body">
+                
+                
+                
+                <!--/stories
+            
+                <div class="row">    
+                  <form method="POST" action="/admin/add">
+                    <div class="container col-12">
+                     Title:<input type="text" name="title"><br><br>
+                     Author:<input type="text" name="author"><br><br>
+                     Genre:<input type="text" name="genre"><br><br>
+                     Image:<input type="file" name="image"><br><br>
+                     <button type="Submit">Add</button>
+                    </div>
+                  </form>
+                </div>-->
+                
+                <form class="addauthorform" action="/books/update" method="POST">
+
+
+
+                  <p class="h2 mb-4">EDIT Book</p>
+                  <input id="title" name="title" type="text" value="<%=data.title%>" class="form-control mb-4" placeholder="Book Name" required>
+                  <br>
+                  <!-- Title -->
+                  <input id="author" name="author" type="text" value="<%=data.author%>" class="form-control mb-4" placeholder="Author Name" required>
+              
+                  <br>
+                  <input id="genre" name="genre" value="<%=data.genre%>" class="form-control rounded-0"  rows="3" placeholder="Genre" required>
+                  <!-- Author -->  <br>
+                  <input id="image" name="image" type="text" value="<%=data.image%>" class="form-control mb-4" placeholder="Image URL" required>
+              
+                
+                  
+                 
+                   
+          
+              
+              
+                  
+              
+                  <!-- Send button -->
+                  <input type="hidden" name="id" value="<%=data._id%>">
+                  <button id="updatebtn" class="btn btn-success" type="submit">Update Book</button>
+                 
+                
+              </form>
+              
+             
+                
+                
+                
+                
+              </div>
+            </div>
+                                                                                             
+                                                          
+                                                            
+             </div><!--/col-12-->
+        </div>
+      </div>
+                                                      
+                                                                                      
+      <hr>
+      
+      <div class="container" id="footer">
+        <div class="row">
+          <div class="col col-sm-12">
+            
+            <h1>Follow Us</h1>
+            <div class="btn-group">
+             <a class="btn btn-twitter btn-lg" href="#"><i class="icon-twitter icon-large"></i> Twitter</a>
+             <a class="btn btn-facebook btn-lg" href="#"><i class="icon-facebook icon-large"></i> Facebook</a>
+             <a class="btn btn-google-plus btn-lg" href="#"><i class="icon-google-plus icon-large"></i> Google+</a>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+      <hr>
+      
+      <hr>
+      
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="list-inline">
+                <li><i class="icon-facebook icon-2x"></i></li>
+                <li><i class="icon-twitter icon-2x"></i></li>
+                <li><i class="icon-google-plus icon-2x"></i></li>
+                <li><i class="icon-pinterest icon-2x"></i></li>
+              </ul>
+              
+            </div>
+            
+          </div>
+        </div>
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+          <a href="/"> Pustakam.com</a>
+        </div>
+      </footer>
+      <script src="js/bootstrap.min.js"></script>
+</body>
+</html>

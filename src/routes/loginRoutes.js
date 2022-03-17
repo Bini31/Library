@@ -20,8 +20,15 @@ const Usersdata=require('../model/Usersdata')
            pwd:req.query.pwd
            }
            var flag=false;
-           console.log(checkuser);
+           
+            if(checkuser.uid=="admin@gmail.com" && checkuser.pwd=="admin")
+           {
+               res.redirect('/index')
+
+           }
+           else{
            Usersdata.find().then(function(users){
+            
                for(let i=0;i<users.length;i++)
                {
             if(checkuser.uid==users[i].uid && checkuser.pwd==users[i].pwd)
@@ -31,20 +38,23 @@ const Usersdata=require('../model/Usersdata')
               break;
            
             }
+           
             else{
               flag=false;
                 
                 }
+
             }  
             if(flag==true){
-                res.redirect('/index')
+                res.redirect('/userindex')
             }
-            else
+            else if(flag==false)
             {
                 res.redirect('/signup')
             }
-           })
            
+           })
+        }  
       
     });
     

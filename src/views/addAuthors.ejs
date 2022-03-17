@@ -48,7 +48,7 @@
       </div>
       
       
-      <div class="container">
+      <div class="container"  >
         <div class="row">
           
           <div class="col-md-12"> 
@@ -71,19 +71,20 @@
                     </div>
                   </form>
                 </div>-->
-                
-                <form class="addauthorform" action="/addAuthors/add" method="POST">
+              
+                 
+                <form class="addauthorform"  action="/addAuthors/add" enctype="multipart/form-data"    method="POST"  >
 
 
 
-                  <p class="h2 mb-4">ADD AUTHOR</p>
+                  <p  class="h2 mb-4">ADD AUTHOR</p>
               
                   <!-- Title -->
                   <input id="author" name="author" type="text"  class="form-control mb-4" placeholder="Author Name" required>
               
                   <br>
                   <!-- Author -->
-                  <input id="image" name="image" type="file"  class="form-control mb-4" placeholder="Image URL" required>
+                  <input id="image" name="image" type="file"   class="form-control mb-4" placeholder="Image URL" required>
               
                   <br>
                   <div class="form-group">
@@ -94,10 +95,10 @@
                   
               
                   <!-- Send button -->
-                  <button id="addbtn" class="btn btn-success" type="submit">Add Author</button>
+                  <button  id="addbtn" class="btn btn-success"   type="submit" >Add Author</button >
                  
                 
-              </form>
+              </form  >
               
              
                 

@@ -1,25 +1,16 @@
 const express=require('express');
 const addauthorRouter=express.Router();
 const Authordata=require('../model/Authordata')
-function router(nav){
+function router(nav,upload){
 addauthorRouter.get('/',function(req,res){
     res.render('addAuthors',{
         nav,
+        upload,
         title:'Library'
     })
 })
-addauthorRouter.post('/add',function(req,res){
-   // res.send("Hey iam added");
-   /*var item={
-    title:req.query.title,
-    author:req.query.author,
-    genre:req.query.genre,
-    image:req.query.image
-   }
-   var book=Bookdata(item);
-   book.save();//saving to database
-   res.redirect('/books');*/
-   //res.send("Hey iam added|||");
+addauthorRouter.post('/add', upload.single('image'),function(req,res){
+  
    var item={
    
     author:req.body.author,
@@ -31,6 +22,9 @@ addauthorRouter.post('/add',function(req,res){
    res.redirect('/authors');
    
 })
+
+
+
 return addauthorRouter;
 }
 module.exports=router;
