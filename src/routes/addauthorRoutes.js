@@ -14,7 +14,7 @@ addauthorRouter.post('/add', upload.single('image'),function(req,res){
    var item={
    
     author:req.body.author,
-    image:req.body.image,
+    image:req.file.originalname,
     about:req.body.about
    }
    var author=Authordata(item);
