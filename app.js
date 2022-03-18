@@ -42,7 +42,7 @@ cb(null,image);
 })
 const upload=multer({storage:storage});
 const booksRouter=require('./src/routes/bookRoutes')(nav);
-const adminRouter=require('./src/routes/adminRoutes')(nav);
+const adminRouter=require('./src/routes/adminRoutes')(nav,upload);
 const indexRouter=require('./src/routes/indexRoutes')(nav);
 const authorsRouter=require('./src/routes/authorRoutes')(nav);
 const addauthorRouter=require('./src/routes/addauthorRoutes')(nav,upload);
