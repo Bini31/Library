@@ -72,7 +72,7 @@
                     <!-- First name -->
                     <div class="md-form">
                         <label for="fname">First name</label>
-                        <input type="text" id="fname" class="form-control" required>
+                        <input type="text" id="fname" name="fname" onchange="validateFirstName()" class="form-control" required>
                         <label for="fname" id="fnamefeedback" style="color:red; visibility:hidden">Should contain only alphabets.</label>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                     <!-- Last name -->
                     <div class="md-form">
                         <label for="lname">Last name</label>   
-                        <input type="text" id="lname" class="form-control" required>
+                        <input type="text" name="lname" onchange="validateLastName()" id="lname" class="form-control" required>
                         <label for="lname" id="lnamefeedback" style="color:red; visibility:hidden">Should contain only alphabets.</label>
                  </div>
                 </div>
@@ -102,7 +102,7 @@
             <!-- Password -->
             <div class="md-form mt-0">
                 <label for="pwd">Password</label>
-                <input id="pwd" name="pwd" type="password" id="pwd" onkeyup="validatePassword(this.value)" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" required>
+                <input id="pwd" name="pwd" type="password" id="pwd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" required>
               
 
             </div>
@@ -112,12 +112,14 @@
                 <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
                 <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
                 <p id="number" class="invalid">A <b>number</b></p>
+               
+                
                 <p id="length" class="invalid">Minimum <b>8 characters</b></p>
               </div>
       
             <!-- Sign up button -->
             <!-- <button class="btn btn-outline-info btn-rounded  my-4 waves-effect z-depth-0" type="submit">Sign Up</button> -->
-            <button id="signup" name="signup" type="submit"  class="btn btn-success text-center">Sign Up</button>
+            <button id="signup" name="signup" type="submit"   class="btn btn-success text-center">Sign Up</button>
             <br>
 
             
@@ -153,8 +155,51 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
  
     <script>
+        function validateFirstName()
+{
+    let regfname=/^[a-zA-Z ]*$/;
+    if(!regfname.test(fname.value)){
+   alert("Invalid first name given");
+   fname.focus();
+   fname.value="";
+
+}
+  else{
+alert("valid first name given");
+return true;
+  }
+  if(!regname.test(lname.value)){
+   alert("Invalid last name given");
+   lname.focus();
+   lname.value="";
+
+}
+  else{
+alert("valid last name given");
+return true;
+  }
+}
+function validateLastName(){
+    let reglname=/^[a-zA-Z ]*$/;
+    if(!reglname.test(lname.value)){
+   alert("Invalid last name given");
+   lname.focus();
+   lname.value="";
+
+}
+  else{
+alert("valid last name given");
+return true;
+  }
+}
         var myInput = document.getElementById("pwd");
         var msgpass = document.getElementById("message");
+        var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+
+var length = document.getElementById("length");
+
         myInput.onfocus = function () {
     msgpass.removeAttribute("hidden", "true")
     document.getElementById("message").style.display = "block";
@@ -164,55 +209,49 @@
 myInput.onblur = function () {
     document.getElementById("message").style.display = "none";
 }
+myInput.onkeydown = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+  
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {  
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
 
-function validatePassword(password) {
-
-    if (password.length === 0) {
-        document.getElementById("msg").innerHTML = "";
-        return;
-    }
-
-
-
-    // Create an array and push all possible values that you want in password
-    var matchedCase = new Array();
-    matchedCase.push("[$@$!%*#?&]"); // Special Charector
-    matchedCase.push("[A-Z]");      // Uppercase Alpabates
-    matchedCase.push("[0-9]");      // Numbers
-    matchedCase.push("[a-z]");     // Lowercase Alphabates
-
-    // Check the conditions
-    var ctr = 0;
-    for (var i = 0; i < matchedCase.length; i++) {
-        if (new RegExp(matchedCase[i]).test(password)) {
-            ctr++;
-        }
-    }
-    // Display it
-    var color = "";
-    var strength = "";
-    switch (ctr) {
-        case 0:
-        case 1:
-        case 2:
-            strength = "Very Weak Password";
-            color = "red";
-            break;
-        case 3:
-            strength = "Medium Password";
-            color = "orange";
-            break;
-        case 4:
-            strength = "Strong Password";
-            color = "green";
-            break;
-    }
-    document.getElementById("msg").innerHTML = strength;
-    document.getElementById("msg").style.color = color;
-   
-
-
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+  
+  // Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
 }
+
+
+
 let myemail=document.getElementById("uid");
 let error=document.getElementById("error");
 function validate()
