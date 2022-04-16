@@ -63,7 +63,7 @@
             <form class='col-12 login' action="/login/check"  method="GET">
 
               <div class="form-group">
-                <input id="uid" name="uid" class='form-control' type="email" placeholder="Enter Username(email id)" id="mail" required>
+                <input id="uid" name="uid" onchange="validate()" class='form-control' type="email" placeholder="Enter Username(email id)"  required>
                 
 
               </div>
@@ -104,6 +104,31 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
- 
+  <script>
+    let myemail=document.getElementById("uid");
+    let error=document.getElementById("error");
+    function validate()
+    { let regexp=/^([A-Za-z0-9\.-]+)@([A-Za-z0-9\-]+).([a-z]{2,3})?$/
+      if(regexp.test(myemail.value)){
+          error.innerHTML="valid";
+          error.style.color="green";
+          return true;
+      }
+      else{
+          
+          error.innerHTML="invalid";
+          error.style.color="red";
+          myemail.value="";
+          myemail.focus();
+         
+          return false;
+         
+      }
+      myemail.onchange = function () {
+        document.getElementById("error").style.display = "none";
+    }
+      
+    }
+     </script>
 </body>
 </html>
