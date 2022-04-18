@@ -81,7 +81,7 @@
                     <!-- Last name -->
                     <div class="md-form">
                         <label for="lname">Last name</label>   
-                        <input type="text" name="lname" onchange="validateLastName()" id="lname" class="form-control" required>
+                        <input type="text"  id="lname" name="lname"  onchange="validateLastName()"  class="form-control" required>
                         <label for="lname" id="lnamefeedback" style="color:red; visibility:hidden">Should contain only alphabets.</label>
                  </div>
                 </div>
@@ -90,7 +90,7 @@
             <!-- E-mail -->
             <div class="md-form mt-0">
                 <label for="email">E-mail</label>
-                <input id="uid" name="uid" type="email" onkeyup="validate()" class="form-control" required>
+                <input id="uid" name="uid" type="email" onchange="validate()" class="form-control" required>
               
 
             </div>
@@ -157,7 +157,8 @@
     <script>
         function validateFirstName()
 {
-    let regfname=/^[a-zA-Z ]*$/;
+    let regfname=/^[a-zA-Z]+$/;
+    
     if(!regfname.test(fname.value)){
    alert("Invalid first name given");
    fname.focus();
@@ -168,21 +169,13 @@
 alert("valid first name given");
 return true;
   }
-  if(!regname.test(lname.value)){
-   alert("Invalid last name given");
-   lname.focus();
-   lname.value="";
-
-}
-  else{
-alert("valid last name given");
-return true;
-  }
+  
 }
 function validateLastName(){
-    let reglname=/^[a-zA-Z ]*$/;
+  let reglname=/^[a-zA-Z]+$/;
+    
     if(!reglname.test(lname.value)){
-   alert("Invalid last name given");
+   alert("Invalid Last name given");
    lname.focus();
    lname.value="";
 
@@ -255,17 +248,20 @@ myInput.onkeydown = function() {
 let myemail=document.getElementById("uid");
 let error=document.getElementById("error");
 function validate()
-{ let regexp=/^([A-Za-z0-9\.-]+)@([A-Za-z0-9\-]+).([a-z]{2,3})?$/
+{ let regexp=/^([\w\.-]+)@([A-Za-z0-9\-]+).([a-z]{2,3})(.[a-z]{2,3}?)$/
+
   if(regexp.test(myemail.value)){
-      error.innerHTML="valid";
+    error.innerHTML="valid";
       error.style.color="green";
       return true;
   }
   else{
-      
-      error.innerHTML="invalid";
-      error.style.color="red";
-      return false;
+    error.innerHTML="invalid";
+          error.style.color="red";
+
+          myemail.focus();
+         
+          return false;
   }
   myemail.onchange = function () {
     document.getElementById("error").style.display = "none";
