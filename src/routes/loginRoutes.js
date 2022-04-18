@@ -21,7 +21,7 @@ const Usersdata=require('../model/Usersdata')
            }
            var flag=false;
            
-            if(checkuser.uid=="admin@gmail.com" && checkuser.pwd=="admin")
+            if(checkuser.uid=="admin@gmail.com" && checkuser.pwd=="Admin12A")
            {
                res.redirect('/index')
 
