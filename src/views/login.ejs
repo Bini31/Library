@@ -175,7 +175,7 @@ myInput.onkeydown = function() {
     let myemail=document.getElementById("uid");
     let error=document.getElementById("error");
     function validate()
-    { let regexp=/^([A-Za-z0-9\.-]+)@([A-Za-z0-9\-]+).([a-z]{2,3})?$/
+    { let regexp=/^([\w\.-]+)@([A-Za-z0-9\-]+).([a-z]{2,3})(.[a-z]{2,3}?)$/
       if(regexp.test(myemail.value)){
           error.innerHTML="valid";
           error.style.color="green";
@@ -185,7 +185,7 @@ myInput.onkeydown = function() {
           
           error.innerHTML="invalid";
           error.style.color="red";
-          myemail.value="";
+      
           myemail.focus();
          
           return false;
